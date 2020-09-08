@@ -21,7 +21,8 @@ function(add_cython_modules python_version)
   if(CYTHON_EXECUTABLE AND Python3_EXECUTABLE)
     add_custom_command(COMMAND ${CMAKE_COMMAND} POST_BUILD
                         -E env MXNET_LIBRARY_PATH=${CMAKE_BINARY_DIR}/libmxnet.so
-                        ${Python3_EXECUTABLE} setup.py build_ext --inplace --with-cython
+                        ${ASAN_PRELOAD} ${Python3_EXECUTABLE} setup.py build_ext
+                        --inplace --with-cython
                         TARGET mxnet
                         WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}/python")
     message("-- Cython modules will be built")

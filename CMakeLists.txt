@@ -308,6 +308,7 @@ if(USE_ASAN)
   set(CMAKE_LINKER_FLAGS "${CMAKE_LINKER_FLAGS} -fsanitize=address")
   set(GTEST_LIBRARIES "${GTEST_LIBRARIES} -fsanitize=address")
   list(APPEND mxnet_LINKER_LIBS asan)
+  set(ASAN_PRELOAD "LD_PRELOAD=libasan.so" CACHE INTERNAL "Library preload for address sanitizer")
 endif()
 
 list(APPEND mxnet_LINKER_LIBS ${mshadow_LINKER_LIBS})
